@@ -96,7 +96,7 @@ int main() {
 
 
     if (col != row + 1) {
-        cerr << "[!] Expect augmented matrix: columns must equal rows+1\n";
+        cout << "[!] Expect augmented matrix: columns must equal rows+1\n";
         return 1;
     }
 
@@ -104,6 +104,7 @@ int main() {
 
     cout << "Enter the matrix elements \n";
     for (int i = 0; i < row; i++) {
+        cout<<"Enter row "<<i+1<<": ";
         for (int j = 0; j < col; j++) {
             if (!(cin >> matrix[i][j])) { cout << "Invalid matrix element\n"; return 1; }
         }
@@ -121,11 +122,11 @@ int main() {
 
         // if lead=0 we should swap wit row != 0
         bool swapped=false;
-        if (matrix[lead][lead] < EPS)
+        if (fabs(matrix[lead][lead]) < EPS)
         {
             for (int i = lead+1; i < row; i++)
             {
-                if (matrix[i][lead] > EPS)
+                if (fabs(matrix[i][lead]) > EPS)
                 {
                     swapRows(matrix, lead, i, col);
                     cout<<"Swapped row "<< lead << "with "<<i<<"\n";
@@ -146,7 +147,7 @@ int main() {
         if (fabs(divisor) > EPS && fabs(divisor - 1) > EPS )
         {
             cout << "Dividing row " << lead << " by " << divisor << "\n";
-            for (int j = 0; j < row; j++)
+            for (int j = 0; j < col; j++)
             {
                 matrix[lead][j] /= divisor;
             }
